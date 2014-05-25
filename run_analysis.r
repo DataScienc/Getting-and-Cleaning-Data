@@ -2,8 +2,8 @@
 #Assumtion
 ##The assumption here is that "UCI HAR Dataset" folder, which is extracted from the zip file provided is set as the working directory.
 
-#Step 1- Creating the complete 
-##Importing the columnnames to r
+# Step 1- Creating the complete 
+## Importing the columnnames to r
 colnm<-read.table("features.txt")
 
 ##Creating the test Data Frame and naming the columns
