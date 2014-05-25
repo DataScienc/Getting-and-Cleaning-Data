@@ -40,13 +40,12 @@ for(i in 1:nrow(data)){
                 }
 colnames(data)[69]<-"activity"
 data$activity<-as.factor(data$activity)
-d1<-data[,c(1:2,69,3:68)] 
+data<-data[,c(1:2,69,3:68)] 
 
 #Step 4- Appropriately labels the data set with descriptive activity names. 
 colnames(data)<-tolower(colnames(data))
-colnames(data)<-gsub("()","",colnames(data) ,fixed=T)
-colnames(data)<-sub("fbody","frequencyDomain",colnames(data))
-colnames(data)<-sub("tbody","timeDomainBody",colnames(data))
+colnames(data)<-gsub("fbody","frequencyDomain",colnames(data))
+colnames(data)<-gsub("tbody","timeDomainBody",colnames(data))
 colnames(data)<-sub("tgravity","timeDomainGravity",colnames(data))
 colnames(data)<-gsub("gyro","Gyroscope",colnames(data), fixed=T)    
 colnames(data)<-gsub("acc","Accelaration",colnames(data) ,fixed=T)
@@ -55,6 +54,7 @@ colnames(data)<-gsub("-x","Xcoordinate",colnames(data) ,fixed=T)
 colnames(data)<-gsub("-y","Ycoordinate",colnames(data) ,fixed=T)
 colnames(data)<-gsub("-z","Zcoordinate",colnames(data) ,fixed=T)
 colnames(data)<-gsub("-std","StandardDeviation",colnames(data) ,fixed=T)
+colnames(data)<-gsub("()","",colnames(data) ,fixed=T)
 colnames(data)<-gsub("-","",colnames(data) ,fixed=T)
 colnames(data)<-gsub("jerk","Jerk",colnames(data) ,fixed=T)
 colnames(data)<-gsub("mean","Mean",colnames(data) ,fixed=T)
