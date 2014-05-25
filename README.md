@@ -16,8 +16,7 @@ Getting and Cleaning Data- Course Project
 ##### We begin by importing the coloumn names from "_features.txt_" to _colnm_ vector.This file has a total of 561 column names to be used ahead
 colnm<-read.table("features.txt")
 
-#####We begin creating the test Data Frame by uploading the X_test.txt file and naming the coloumns using the colnm vector.X_test is read first to match the column names to the repective data. Then we proceed to read in the subject_test and y_test files, while combining 
-#####them with xtest to using cbind to create the test matrix. the test data set has 2947 rows and 563 coloumns
+#####We begin creating the test Data Frame by uploading the X_test.txt file and naming the coloumns using the colnm vector.X_test is read first to match the column names to the repective data. Then we proceed to read in the subject_test and y_test files, while combining them with xtest to using cbind to create the test matrix. the test data set has 2947 rows and 563 coloumns
 xtest<-read.table("./test/X_test.txt")
 colnames(xtest)<-colnm[[2]]
 test<- cbind(read.table("./test/subject_test.txt"),read.table("./test/y_test.txt"),xtest)
@@ -34,13 +33,7 @@ colnames(train)[c(1,2)]<- c("subject","activityid")
 data<-rbind(test,train)
 
 ###Step 2- Extract only the measurements on the mean and standard deviation for each measurement. 
-##### The problem requires us to work with data containg mean and standard deviation data alone. Hence we subset the data in a way 
-##### that allows us to seperate all the variables associated with mean and standard deviation. We use the **_grep()_** function for this purpose.On runnng 
-#####the grep function we find that 46 columns are associated with mean. But on closer inspection, we realize that 13 of the 46 observations are using meanFreq
-##### which gives the _**weighted average**_ of the frequency components to obtain a mean frequency. Since weighted average is involved we have leave them out  
-##### of the subset. This leaves us with 33 variables for both mean and standard devaition 
-##### We thus use the indices obtained from the grep function to subset the old data set and include the mean and standard deviation variables along 
-#####subject and activity id variables.The new datafrme has 10299 rows and 68 coloumns.
+##### The problem requires us to work with data containg mean and standard deviation data alone. Hence we subset the data in a way that allows us to seperate all the variables associated with mean and standard deviation. We use the **_grep()_** function for this purpose.On runnng the grep function we find that 46 columns are associated with mean. But on closer inspection, we realize that 13 of the 46 observations are using meanFreq which gives the _**weighted average**_ of the frequency components to obtain a mean frequency. Since weighted average is involved we have leave them out of the subset. This leaves us with 33 variables for both mean and standard devaition . We thus use the indices obtained from the grep function to subset the old data set and include the mean and standard deviation variables along subject and activity id variables.The new datafrme has 10299 rows and 68 coloumns.
 
 colwithmean<- grep("mean()",colnames(data),fixed =T)
 colwithstd<-grep("std()",colnames(data),fixed =T)
