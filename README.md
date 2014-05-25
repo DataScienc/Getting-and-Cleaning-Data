@@ -8,20 +8,15 @@ Getting and Cleaning Data- Course Project
 * "_UCI HAR Dataset_" folder, which is extracted from the zip file provided is set as the working directory.
 * "plyr" package for reshaping data is installed and loaded
 
-##### This working directory has two folders(test and train) and 4 text files("features.txt", "features_info.txt","Readme.txt" and "activity_labels.txt" 
-#####Test folder has three text files("X_test.txt","y_test.txt" and "subject_test.txt") that we'll be loading for test data. Similarly Train folder has
-##### 3 files("X_train.txt","Y_train.txt" and "subject_train.txt")
-#####x_test and X_train are the largest files which contain data for 561 variables received from accelorometer and gyrometer of samsung phone.
-##### Y_test and Y_train contains the information about the type of activity performed and subject_test and subject _train provides information about
-#####the subjects in test and training set respectively.
+##### This working directory has two folders(test and train) and 4 text files("features.txt", "features_info.txt","Readme.txt" and "activity_labels.txt" .Test folder has three text files("X_test.txt","y_test.txt" and "subject_test.txt") that we'll be loading for test data. Similarly Train folder has 3 files("X_train.txt","Y_train.txt" and "subject_train.txt")
+#####X_test and X_train are the largest files which contain data for 561 variables received from accelorometer and gyrometer of samsung phone.Y_test and Y_train contains the information about the type of activity performed and subject_test and subject _train provides information about the subjects in test and training set respectively.
 
 ###Step 1- Creating the complete data set from _Training_ and _Test_ data
 
 ##### We begin by importing the coloumn names from "_features.txt_" to _colnm_ vector.This file has a total of 561 column names to be used ahead
 colnm<-read.table("features.txt")
 
-#####We begin creating the test Data Frame by uploading the X_test.txt file and naming the coloumns using the colnm vector.X_test is read 
-#####first to match the coloumn names to the repective data. Then we proceed to read in the subject_test and y_test files, while combining 
+#####We begin creating the test Data Frame by uploading the X_test.txt file and naming the coloumns using the colnm vector.X_test is read first to match the column names to the repective data. Then we proceed to read in the subject_test and y_test files, while combining 
 #####them with xtest to using cbind to create the test matrix. the test data set has 2947 rows and 563 coloumns
 xtest<-read.table("./test/X_test.txt")
 colnames(xtest)<-colnm[[2]]
