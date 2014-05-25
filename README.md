@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 Getting and Cleaning Data- Course Project
 ===========================================
+=======
+Getting-and-Cleaning-Data
+==========================
+>>>>>>> cc7846a4d1eef84c1b9f26a20e6926fc37106d78
 
 
 ###Assumtion
