@@ -40,17 +40,22 @@ colwithstd<-grep("std()",colnames(data),fixed =T)
 data<- data[,c(1,2,colwithmean,colwithstd)]
 
 ###Step 3- Uses descriptive activity names to name the activities in the data set
-#####The next step involves using the _"activity_labels.txt"_ file in the home directory to assign activty labels to activity id.
-##### We use control structures(for and else if commands) in r to perform this task.  The labels from activity_labels.txt are assigned to a new column
-##### which is named as -"activity" .
+#####The next step involves using the _"activity_labels.txt"_ file in the home directory to assign activty labels to activity id.We use control structures(for and else if commands) in r to perform this task.  The labels from activity_labels.txt are assigned to a new column which is named as -"activity" .
 for(i in 1:nrow(data)){
+        
         if(data[i,2]== 1){data[i,69]<- "WALKING"}
+        
         else if(data[i,2]== 2){data[i,69]<- "WALKING_UPSTAIRS"}
+        
         else if(data[i,2]== 3){data[i,69]<- "WALKING_DOWNSTAIRS"}
+        
         else if(data[i,2]== 4){data[i,69]<- "SITTING"}
+        
         else if(data[i,2]== 5){data[i,69]<- "STANDING"}
+        
         else if(data[i,2]== 6){data[i,69]<- "LAYING"}
                 }
+
 colnames(data)[69]<-"activity"
 
 ##### Once the new column is created we rearrange the columns in the "data" datafrme to bring together "activity_id" and "activity" variables
@@ -58,49 +63,60 @@ data$activity<-as.factor(data$activity)
 d1<-data[,c(1:2,69,3:68)] 
 
 ###Step 4- Appropriately labels the data set with descriptive activity names. 
-###### Once the dataset is ready we begin the data cleaning process. Since the variable names are incoherent with tidy data rules we perform a 
-#####number of data cleaning tasks.
+###### Once the dataset is ready we begin the data cleaning process. Since the variable names are incoherent with tidy data rules we perform a number of data cleaning tasks.
 * Ensure all letters of variable names are in lowercase using tolower()function
 colnames(data)<-tolower(colnames(data))
 
 * We use gsub to make the following variable names more descriptive  
 colnames(data)<-sub("fbody","frequencyDomain",colnames(data))
+
 colnames(data)<-sub("tbody","timeDomainBody",colnames(data))
+
 colnames(data)<-sub("tgravity","timeDomainGravity",colnames(data))
+
 colnames(data)<-gsub("gyro","Gyroscope",colnames(data), fixed=T)    
+
 colnames(data)<-gsub("acc","Accelaration",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("mag","Magitude",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("-x","Xcoordinate",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("-y","Ycoordinate",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("-z","Zcoordinate",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("-std","StandardDeviation",colnames(data) ,fixed=T)
 
-*gsub is used here to remove unwanted symbols from variable names
+* gsub is used here to remove unwanted symbols from variable names
+
 colnames(data)<-gsub("()","",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("-","",colnames(data) ,fixed=T)
 
-*gsub is used here to uppercase the first letters of the following words and hence make the entire variable names in Camel Case
+* gsub is used here to uppercase the first letters of the following words and hence make the entire variable names in Camel Case
+
 colnames(data)<-gsub("jerk","Jerk",colnames(data) ,fixed=T)
+
 colnames(data)<-gsub("mean","Mean",colnames(data) ,fixed=T)
 
-#####  **_Please note that the only reason we have decided to use CamelCase and not all lower case here is to improve the readability 
-##### of the variable names_**
+#####  **_Please note that the only reason we have decided to use CamelCase and not all lower case here is to improve the readability of the variable names_**
 
 
 ###Step 5-Create a second, independent tidy data set with the average of each variable for each activity and each subject
 
-##### Inorder to obtain data in the required form we must first melt and the recast data.This is done using the functions in plyr package
-##### which we assumed is already installed and loaded
+##### Inorder to obtain data in the required form we must first melt and the recast data.This is done using the functions in plyr package which we assumed is already installed and loaded
 
-#####We begin by converting the data from wide format to long format using the melt function. We use subjects, activityid and activity as id variables .
-#####  The remainig become measured variables by default
+#####We begin by converting the data from wide format to long format using the melt function. We use subjects, activityid and activity as id variables. The remainig become measured variables by default
+
 datamelt<- melt(data,id= c("subject","activityid","activity"))
 
-###### Now we cast the matrix back to wide data form using dcast function. The fun.aggregate function allows us to calcuate the average
-#####of each variable for each activity and each subject.
+###### Now we cast the matrix back to wide data form using dcast function. The fun.aggregate function allows us to calcuate the average of each variable for each activity and each subject.
+
 tidydataset<-dcast(datamelt,subject+activityid+activity~variable,fun.aggregate=mean)
 
 ##### "tidydataset" is the desired matrix which is then written a text file in working directory using the write.table() function
+
 write.table(tidydataset,"./tidydataset.txt")
 
                   
