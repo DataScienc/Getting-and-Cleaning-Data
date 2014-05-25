@@ -1,5 +1,4 @@
-Getting-and-Cleanng-Data Code
-=============================
+
 #Assumtion
 ##The assumption here is that "UCI HAR Dataset" folder, which is extracted from the zip file provided is set as the working directory.
 
