@@ -6,7 +6,7 @@
 ##Importing the columnnames to r
 colnm<-read.table("features.txt")
 
-##Creating the test Data Frame and naming the coloumns
+##Creating the test Data Frame and naming the columns
 xtest<-read.table("./test/X_test.txt")
 colnames(xtest)<-colnm[[2]]
 test<- cbind(read.table("./test/subject_test.txt"),read.table("./test/y_test.txt"),xtest)
@@ -59,7 +59,8 @@ colnames(data)<-gsub("-","",colnames(data) ,fixed=T)
 colnames(data)<-gsub("jerk","Jerk",colnames(data) ,fixed=T)
 colnames(data)<-gsub("mean","Mean",colnames(data) ,fixed=T)
 
-#Step 5-Create a second, independent tidy data set with the average of each variable for each activity and each subject. Writing the data to a text file
+#Step 5-Create a second, independent tidy data set with the average of each variable for each activity and each subject. 
+#Writing the data to a text file
 datamelt<- melt(data,id= c("subject","activityid","activity"))
 tidydataset<-dcast(datamelt,subject+activityid+activity~variable,fun.aggregate=mean)
 write.table(tidydataset,"./tidydataset.txt")
